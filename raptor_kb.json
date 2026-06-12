@@ -1,0 +1,641 @@
+{
+  "meta": {
+    "kb_version": "1.2",
+    "updated": "2026-06-12",
+    "owner": "Brett O'Leary",
+    "purpose": "Single source of truth for the RaptorTech Sales Playbook AI query engine and (in time) the calculator and AI feature prompts. All AI answers must be grounded in this data.",
+    "global_rules": [
+      "Answer ONLY from this KB. If a fact is not here, say it is not in the playbook and to confirm with Brett — never invent.",
+      "RaptorTech scope only. Do not describe capabilities, integrations, certifications, or products not stated here.",
+      "NO superlative or comparative claims about RaptorTech. Do not generate 'best', 'world-first', 'most advanced', 'market-leading', 'industry benchmark', or similar. State capabilities and specifications factually and let them speak.",
+      "Safety systems are ASSISTIVE ONLY (clause 28). Never describe CAS, fatigue, proximity, or guidance as autonomous control, as guaranteeing incident prevention, or as replacing operational procedures or statutory obligations.",
+      "Items tagged status 'certification_pending' or 'roadmap_future' are NOT available now. Never present them as shipping or available.",
+      "Items tagged 'confirm_signed' (SLA terms, fees, rosters, credits) vary per signed agreement. Always say to confirm against the specific customer's signed contract.",
+      "Example studies are anonymised method references only. Never quote their specific figures as RaptorTech benchmarks, and never name the client or any individual.",
+      "All AI output is an internal draft for human review before any client use."
+    ]
+  },
+  "company": {
+    "name": "RaptorTech Pty Ltd",
+    "acn": "627 435 698",
+    "tagline": "Evolve Your Thinking",
+    "model": "Technology as a Service (TaaS) — fully managed. Hardware, back-end support, software updates and hardware replacement included in the monthly fee. Only accident damage and post-deployment site labour are excluded.",
+    "platform": "RaptorOS — a single modular mining technology platform. Distributed architecture, standardised data outputs regardless of asset type, open APIs, independent components that scale.",
+    "positioning_vs_competitors": {
+      "named_competitors": [
+        "Hexagon",
+        "Wenco"
+      ],
+      "approved_framing": "RaptorTech is priced below Hexagon/Wenco. The objection is typically perceived quality, not cost. Answer with the chipset-up hardware narrative — RaptorTech builds its own hardware from the chipset up rather than reselling. Reference competitors only at this level. Do NOT invent competitor specs, prices, or comparative claims.",
+      "rule": "Mention competitors only as above. Never fabricate comparisons."
+    },
+    "history": {
+      "founded": "Western Australia, by mining technology specialists with backgrounds in autonomous haulage, FMS modernisation and machine guidance.",
+      "consulting_heritage": "~7 years supporting mining operations on third-party dispatch systems (Hexagon, Modular, Wenco, Minestar) before launching its own platform.",
+      "raptoros_launch": "RaptorOS platform launched October 2024 at MinExpo, following a first deployment in South Australia in 2023.",
+      "scale": "1,000+ connected machines running HPGPS, FMS, CAS and telemetry across Australia.",
+      "rule": "State these as factual history. Do not add superlatives or comparative claims."
+    }
+  },
+  "products": {
+    "FleetM": {
+      "name": "FleetM (Fleet Manager)",
+      "category": "Fleet management and productivity",
+      "status": "available",
+      "summary": "Real-time insight into asset utilisation, productivity and telemetry. Integrates with OEM data streams (Caterpillar, Komatsu, Liebherr).",
+      "capabilities": [
+        "PitBoss real-time 3D pit interface — view every machine, ~3-5 seconds behind live; jump into any machine to see passes, payload, operator, cycle/swing time, truck model",
+        "Automatic categorisation of fleet activities, idle time, load count, operating hours",
+        "Real-time location, speed and asset health metrics from OEM sensors",
+        "Production load reporting and material flow accounting",
+        "Automated time-utilisation tracking (queue at dump, queue at loading, productive, standby, first/last load)",
+        "Digital prestart and hazard reporting",
+        "Maintenance reporting including operator pre-start and OEM alarms",
+        "Supervisor visibility of fleet performance, dispatch tools, operator-specific metrics",
+        "Timeline editing with full audit trail for time-utilisation corrections (original values retained, edits tracked to users)",
+        "Digital pre-starts linkable to work orders / ERP references",
+        "Hazard dashboards with role-based ownership",
+        "Shift scheduling by location or task",
+        "Push notifications for mis-dumps and non-scheduled work",
+        "All dispatch functions accessible through any web browser (no special software/hardware)",
+        "Supervisor and in-pit spotter assignment tools (10\" tablet, assign trucks/materials/dumps in field)",
+        "Operator-selectable telemetry fields on the in-cab interface",
+        "Supervisor-First dispatch / Short Interval Control: assignment engine evaluates live dig-unit capacity, queue lengths, travel times, hang time; current tools lock trucks to loading tools",
+        "Material flow accounting: every load geolocated to source/dump, auto-reconciliation against design, material-mismatch warnings to operator/supervisor",
+        "Time-series data at ~1s interval; load records and configurable time-utilisation model",
+        "OEM health telemetry ingested via RaptorCore; exportable via API for customer ERP/maintenance systems (no proprietary predictive-maintenance algorithm claimed)"
+      ]
+    },
+    "PrecisN": {
+      "name": "PrecisN (Machine Guidance / HPGPS)",
+      "category": "High-precision machine guidance",
+      "status": "available",
+      "summary": "3D spatial guidance for operators with execute-to-design accuracy. Operates standalone or integrated.",
+      "capabilities": [
+        "Execute to design to within 20mm",
+        "Supports excavators, dozers, graders, loaders, drills and light vehicles",
+        "Real-time surface updates visualising progress to plan",
+        "Real-time compliance reporting",
+        "Upload/sync designs from Raptor Cloud GIS to machines (local upload available)",
+        "Height/Depth/Slew restrictions to 3D designs",
+        "When combined with PerceptN, high-precision GPS machines can implement spatial avoidance (map-based no-go areas)"
+      ],
+      "tech_spec": [
+        "Compatible with RTCM and CMR+",
+        "UHF or NTRIP corrections",
+        "DXF or LandXML file types",
+        "Multisurface support, in-field designs"
+      ]
+    },
+    "PerceptN": {
+      "name": "PerceptN (Collision Avoidance)",
+      "category": "Collision avoidance / operator safety",
+      "status": "available",
+      "safety_disclaimer": "Assistive only (clause 28). Provides awareness and advisory by default. Does not autonomously control machines unless the optional intervention layer is fitted, and even then operators remain responsible and it does not guarantee incident prevention.",
+      "summary": "On-machine collision avoidance built from layered detection. Entry-level GPS peer-to-peer avoidance is included in the RaptorOS infrastructure deployment; further layers are added to match risk.",
+      "design_provenance": "The detection layers use the same categories of perception technology found on autonomous mining equipment, brought down to manned operations. Use this as the autonomous-first narrative — NOT as a claim that the product is autonomous.",
+      "layers": {
+        "PerceptGNSS": {
+          "label": "V2X Precision GPS",
+          "status": "available",
+          "detail": "RTK GPS ~20mm position accuracy, ~0.3deg heading. V2X vehicle-to-anything up to ~1km tracking range. 5Hz update. Parallel collision algorithms. Includes basic UWB ranging. Forms the core module.",
+          "effective_range": "up to 500 m (detection via database reference)"
+        },
+        "PerceptULTRA": {
+          "label": "V2X Ultra-Wideband",
+          "status": "available",
+          "detail": "UWB ranging and heading; detects threat position with no GPS — suited to underground / GNSS-denied. ~150mm position accuracy, ~5deg heading, 10Hz. Ultra-low-power option suitable for personnel tags.",
+          "effective_range": "up to 60 m"
+        },
+        "PerceptVISION": {
+          "label": "AI Machine Vision (camera + radar)",
+          "status": "certification_pending",
+          "detail": "Stereo camera depth map to ~40m plus 4D radar to ~120m, onboard NVIDIA GPU, AI object detection/classification at 20Hz, all-weather radar, self-cleaning lens.",
+          "effective_range": "camera 40-60 m, radar up to 120 m",
+          "availability_note": "Certification pending at present. Do not present as available now."
+        },
+        "PerceptAUTO": {
+          "label": "Emergency stop / intervention (Level 9)",
+          "status": "certification_pending",
+          "detail": "Robotic intervention control for emergency braking on tracked/wheel equipment. Fail-safe design, dual processors, ~1 hour install with no permanent machine modification. SIL 2 design principles. ISO21815 compatibility undergoing certification.",
+          "availability_note": "Certification pending at present. The optional Level 9 intervention upgrade is not generally available yet — do not present as shipping. Standard PerceptN provides Level 7 (awareness) and Level 8 (advisory)."
+        }
+      },
+      "integrated_tpms": {
+        "status": "certification_pending",
+        "note": "Integrated TPMS is flagged as in-development. Not available now."
+      }
+    },
+    "Xpit": {
+      "name": "Xpit (Autonomy in Mining)",
+      "category": "Autonomous mining",
+      "status": "roadmap_future",
+      "note": "Future direction, not a currently delivered product. Do not pitch autonomous mining as available. If asked, describe it only as on RaptorTech's roadmap."
+    }
+  },
+  "emesrt_levels": {
+    "source": "EMESRT — industry body on vehicle interactions in mining; 9 levels of control.",
+    "percept_coverage": "PerceptN provides on-machine Levels 7, 8 and 9 capability. Standard PerceptN delivers Level 7 (Operator Awareness) and Level 8 (Advisory Controls). Level 9 (Intervention Controls) is the optional PerceptAuto upgrade — see its certification_pending status.",
+    "levels": {
+      "1": "Site Requirements",
+      "2": "Segregation Controls",
+      "3": "Operating Procedures",
+      "4": "Authority to Operate",
+      "5": "Fitness to Operate",
+      "6": "Operating Compliance",
+      "7": "Operator Awareness — gives operators awareness of nearby vehicles; no advice or intervention",
+      "8": "Advisory Controls — alerts/alarms advising operator action (e.g. brake for vehicle behind)",
+      "9": "Intervention Controls — takes direct control of braking to implement a safety stop"
+    }
+  },
+  "technical": {
+    "raptorcore_hardware": {
+      "summary": "On-machine data collection, processing and edge state management.",
+      "specs": [
+        "Dual MCU architecture (functional safety / added capacity), dual Xtensa LX6 CPUs each",
+        "8-48V DC input, ~500mA peak @5V, IP67",
+        "9-axis IMU; RTK GNSS L1/L5 ~20mm RMS; AHRS ~0.5deg",
+        "2x CAN 2.0B, 6x RS232, 2x RS485, P2P WLAN, 64GB onboard storage (~24 months)",
+        "Ethernet / dual Wi-Fi / LTE / BLE; onboard RTC"
+      ]
+    },
+    "detection_matrix": [
+      {
+        "source": "PerceptGNSS",
+        "mechanism": "V2X high-precision GNSS relative 3D position",
+        "range": "500 m"
+      },
+      {
+        "source": "PerceptULTRA",
+        "mechanism": "V2X ultra-wideband relative 3D position",
+        "range": "60 m"
+      },
+      {
+        "source": "PerceptVISION (camera)",
+        "mechanism": "Vision detects threat + relative 3D position, AI classification",
+        "range": "40-60 m",
+        "status": "certification_pending"
+      },
+      {
+        "source": "PerceptVISION (radar)",
+        "mechanism": "Radar detects threat by size/volume",
+        "range": "120 m",
+        "status": "certification_pending"
+      }
+    ],
+    "communications": {
+      "summary": "Private LTE small cell as the backbone (typically 40W, single data centre, solar/battery, relocatable). WiFi and peer-to-peer used as lower-cost infill. Edge processing means coverage gaps don't lose production data.",
+      "resilience": "Independent edge state machine with full offline operability; 64GB store-and-forward (>6 months); redundant comms (LTE/WLAN/UWB)."
+    },
+    "compatibility_matrix": {
+      "note": "Supported machine models by category. This is the confirmed list; if a model is not listed, say it needs confirmation with engineering rather than assuming support.",
+      "wheel_loaders": {
+        "Caterpillar": [
+          "930K",
+          "938M",
+          "950M",
+          "962M",
+          "966M",
+          "972M",
+          "980K",
+          "982M",
+          "986M",
+          "988K",
+          "990K",
+          "992K",
+          "993K",
+          "994K",
+          "995K"
+        ],
+        "Komatsu": [
+          "WA600",
+          "WA800",
+          "WA900",
+          "WA1200"
+        ]
+      },
+      "tracked_dozers": {
+        "Caterpillar": [
+          "D8T",
+          "D9T",
+          "D9T2",
+          "D10T",
+          "D10T2",
+          "D11T",
+          "D11T2"
+        ],
+        "Liebherr": [
+          "PR 766",
+          "PR 776"
+        ]
+      },
+      "wheeled_dozers": {
+        "Caterpillar": [
+          "834K",
+          "844K",
+          "854K"
+        ]
+      },
+      "graders": {
+        "Caterpillar": [
+          "120M",
+          "14M",
+          "16M",
+          "24M"
+        ]
+      },
+      "excavators": {
+        "note": "Universal OEM kit; hydraulic interlock referenced for EX1200, EX1900"
+      }
+    },
+    "reliability_data": {
+      "as_at": "2025-08-31",
+      "note": "Field reliability data for the deployed intervention/autobrake population. State these as the recorded figures as at the date shown. Do not extrapolate or add superlatives.",
+      "deployed_population_units": 224,
+      "weighted_average_age_years": 1.4,
+      "unit_years": 318.2,
+      "operating_hours": 2090448,
+      "annual_field_failure_rate": "1.6%",
+      "detectable_failures": 4,
+      "undetectable_failures": "Nil",
+      "mttf_total_hours": 522612,
+      "sil2_reference": "SIL 2 typically requires MTTF no lower than 100,000 hours"
+    },
+    "certifications_in_progress": {
+      "status": "certification_pending",
+      "items": [
+        "ISO21815 interoperability (PerceptAuto undergoing certification tests)"
+      ],
+      "note": "Describe as in progress / undergoing certification — not as achieved."
+    }
+  },
+  "commercial": {
+    "pricing_per_machine_month": {
+      "currency": "AUD",
+      "FMSCore": 550,
+      "SafetyCORE": 550,
+      "ProBundle": 700,
+      "LV": 100,
+      "addons": {
+        "PrecisN_excavator_dozer_wheelloader": 1000,
+        "PrecisN_drill": 500,
+        "PerceptVISION": {
+          "price": 1000,
+          "status": "certification_pending"
+        },
+        "PerceptDMS": 100
+      },
+      "notes": "Per machine per month. ProBundle = FMS + CAS combined. Expansion path: position ProBundle as the upsell from a single-module start."
+    },
+    "infrastructure_per_month": {
+      "currency": "AUD",
+      "site_licence": 5000,
+      "data_centre": 2500,
+      "lte_base_station": 1200,
+      "gnss_base_station": 1000,
+      "wifi_trailer": 650,
+      "lte_trailer": 1500,
+      "safety_management_service": 3000
+    },
+    "baseline_study_fee": {
+      "currency": "AUD",
+      "standard": 50000,
+      "large_or_remote": "65000-75000",
+      "note": "W0 Baseline Study. Confirm exact fee per scope."
+    },
+    "out_of_scope_support_rate": {
+      "currency": "AUD",
+      "rate_per_hour": 150,
+      "status": "confirm_signed",
+      "note": "Out-of-scope / after-hours support billed at AUD$150/hr per the standard Support Services Agreement. Confirm against the customer's signed agreement; per-deal terms vary."
+    },
+    "min_term": {
+      "standard_min_months": 24,
+      "expansion_min_months": 18,
+      "note": "Standard minimum commitment 24 months. Each expansion order carries its own 18-month minimum from billing commencement (clause 10A)."
+    },
+    "subscription_terms": {
+      "currency": "AUD",
+      "subscription_start": "Subscription costs begin when hardware is ordered, with up to a 3-month implementation period included.",
+      "payment": "Payments are one month in advance.",
+      "notice_after_term": "After the initial 24-month term, a 3-month notice period is required.",
+      "travel_exclusions": "Rates exclude travel, meals and accommodation unless specified.",
+      "inductions_medicals": "Site inductions and medicals may be charged separately.",
+      "expenses_oncharge": "Expenses may be on-charged at cost + 10%.",
+      "extended_deployment": "Deployment/commissioning is included against an agreed program; extended deployments or extra site visits caused by delays beyond RaptorTech's control are charged at cost + 10%.",
+      "status": "confirm_signed",
+      "note": "Confirm exact terms against the customer's signed agreement."
+    },
+    "install_model": {
+      "summary": "Install commercials follow three models. The default for mining is TaaS with $0 upfront install. A separate install fee applies ONLY to standalone / non-subscription jobs.",
+      "model_1_taas_default": {
+        "label": "Core TaaS deployment (DEFAULT / preferred path for mining)",
+        "upfront_install_cost": 0,
+        "how_install_is_handled": "Install is included in the subscription and amortised across the contract term (typically 24 months). Customer pays monthly from PO / hardware-order stage.",
+        "included_in_install": [
+          "Hardware supply and fitment (machine + site)",
+          "LTE / comms deployment if required",
+          "System configuration and integration",
+          "Commissioning and go-live support",
+          "Ongoing hardware replacement and upgrades"
+        ],
+        "no_separate_charges": [
+          "No install fees",
+          "No mobilisation charges",
+          "No integration invoices"
+        ],
+        "positioning": "Install isn't a decision — it's bundled into the service."
+      },
+      "model_2_taas_plus_technician": {
+        "label": "Subscription + dedicated onsite technician",
+        "upfront_install_cost": 0,
+        "detail": "Same $0 install cost. A dedicated onsite technician (typically 8/6 roster) handles installation, commissioning and optimisation within the broader service agreement. Faster rollout, better adoption/uptime, removes reliance on client labour. Install is included within the technician service scope — NOT charged as a separate install fee.",
+        "status": "confirm_signed"
+      },
+      "model_3_standalone": {
+        "label": "Standalone install (non-TaaS / scoped jobs) — the EXCEPTION, not the strategy",
+        "when_it_applies": "Standalone modules only (e.g. PrecisN-only, PerceptN Vision-only), with no full RaptorOS subscription. Civil/construction jobs and one-off per-asset deployments.",
+        "install_charge": "Install charged separately at ~AUD $125/hr labour, plus travel and parts if needed.",
+        "status": "confirm_signed"
+      },
+      "hard_rule": "The separate install fee (~$125/hr, model 3) applies ONLY to standalone / non-subscription deployments. NEVER add any install or commissioning fee to a TaaS site deployment (models 1 or 2) — for those, install is $0 upfront and bundled into the monthly subscription. Do NOT use a per-machine flat install fee for site deployments."
+    },
+    "standalone_note": "For standalone (non-TaaS) deployments see install_model.model_3_standalone. Install is labour-based (~$125/hr + travel/parts), NOT a flat per-machine fee."
+  },
+  "clauses": {
+    "note": "Summary-level clause reference for BDM questions. These are not the full contract wording — for exact wording and any customer-specific variation, refer to the signed contract.",
+    "4A_CPI": {
+      "name": "CPI escalation",
+      "summary": "Annual adjustment = greater of 3% p.a. or actual Australian CPI (All Groups, ABS). 30 days notice before review date; auto-applies; customer has 14 days to object in writing (payment not suspended).",
+      "hard_stop": true
+    },
+    "4.10_idle_asset": {
+      "name": "Idle asset billing",
+      "summary": "Machines recording >10 operating hours/month = full fee; ≤10 hours/month = 30% standby. Applies fleet-wide at all times including during a pause. RaptorTech system data deemed accurate unless materially incorrect.",
+      "hard_stop": true,
+      "framing": "Position as a customer benefit — protects them during low-activity periods."
+    },
+    "10A_expansions": {
+      "name": "Expansions & reductions",
+      "summary": "Expansion ≤15% of subscribed units = portal/email, auto-accepted, billing adjusts next month. >15% = written variation within 5 business days. Each expansion order has its own 18-month minimum. Scope reductions ≤10% in writing with no penalty; max 25% reduction in any rolling 12 months."
+    },
+    "16A_renewal": {
+      "name": "Renewal",
+      "summary": "Auto-renews annually unless 90+ days written notice. If notice missed, rolls monthly until terminated on 90 days notice."
+    },
+    "16B_pause": {
+      "name": "Pause",
+      "summary": "Qualifying event = customer loses a mining services contract through no fault of their own. Written notice + evidence within 14 days. Max 6 months, once per site per term, term keeps running. Billing during pause governed by clause 4.10 idle rate. Use as a retention/selling lever for contractors."
+    },
+    "18.6_data_rights": {
+      "name": "Data rights",
+      "summary": "Customer owns raw operational data. RaptorTech owns software, algorithms, dashboards, analytics/ML models, derived methodologies and aggregated/anonymised datasets. RaptorTech may use anonymised data for benchmarking/product development without consent; cannot disclose identifiable customer data without prior written consent."
+    },
+    "28_safety_disclaimer": {
+      "name": "Safety disclaimer",
+      "summary": "All CAS, fatigue monitoring, proximity detection and machine guidance are assistive only — not autonomous control. Operators remain responsible. RaptorTech does not warrant incident prevention.",
+      "hard_stop": true,
+      "bdm_rule": "BDMs must NEVER position safety products as replacing operational safety procedures or statutory obligations."
+    }
+  },
+  "support_framework": {
+    "note": "Standard Enterprise Support framework. Specific rosters, fees, credits and response commitments are per signed agreement — always flag confirm_signed.",
+    "supported_systems": [
+      "Fleet management and productivity systems",
+      "Collision avoidance and operator safety systems",
+      "High-precision GPS and machine guidance systems",
+      "Site communications (LTE, WiFi, P2P, UHF, backhaul)",
+      "Telemetry, reporting, data integrity and analytics platforms",
+      "Onboard hardware, tablets, sensors, devices"
+    ],
+    "tiers": {
+      "tier1": "Frontline — first contact, triage, diagnostics, common fixes, escalation",
+      "tier2": "Technical — complex analysis, log/device/network diagnostics, recovery actions",
+      "tier3": "Engineering/Vendor — defects, platform issues, patches/hotfixes/builds"
+    },
+    "incident_priorities": {
+      "status": "confirm_signed",
+      "P1": "Critical / site-wide / safety-critical — initial response target ≤2h; 24x7 escalation",
+      "P2": "High impact / major function degraded — initial response target ≤4h",
+      "P3": "Medium / reduced functionality — business-hours target",
+      "P4": "Low / advisory / minor request — business-hours target",
+      "note": "Response targets are operational objectives, not guarantees. Confirm against signed agreement."
+    },
+    "saas_uptime_target": {
+      "status": "confirm_signed",
+      "value": "≥99.0% monthly uptime for cloud components, excluding planned maintenance and force majeure. Service credits only where a separate SLA is executed."
+    },
+    "onsite_technician": {
+      "status": "confirm_signed",
+      "summary": "Optional rostered onsite technician (standard roster referenced as 8 days on / 6 off; one customer has an extended roster). Installation, maintenance, diagnostics, onsite training, liaison with remote support. Onsite is a supplement to Enterprise Support, not a replacement — off-roster support is remote.",
+      "note": "Roster, vehicle provision and fees vary per signed SLA. Confirm against the specific customer agreement."
+    },
+    "exclusions": [
+      "Unauthorised modification/integration without RaptorTech approval",
+      "Operation outside documented specs / operating design domain",
+      "Third-party infrastructure failures (cloud host, ISP, OEM payload) beyond RaptorTech control",
+      "Negligent operation, lack of training, misuse",
+      "Force majeure",
+      "Unsupported/end-of-life versions where mandatory updates not applied",
+      "Data corruption from external systems/malware/breaches outside RaptorTech systems"
+    ],
+    "order_of_precedence": "EULA prevails for licensing, data rights, cybersecurity and CAS/autonomy safety; Sale Terms & Conditions prevail for general commercial terms (payment, termination, indemnity, liability); the Support Services Agreement prevails only for support processes, tiers, service levels and incident management."
+  },
+  "taas_inclusions": {
+    "note": "What the monthly TaaS fee includes (no upfront hardware or install cost; 24-month minimum).",
+    "included": [
+      "Dedicated customer success representative",
+      "Master data management and ongoing data QA/QC",
+      "Cloud hosting of all data (min 2 years or subscription duration)",
+      "System configuration management (haul road config, location polygons, data cleansing)",
+      "Remote technical support (business hours; P1 escalation 24x7)",
+      "Perpetual hardware warranty/replacement (excludes operator/operational damage)",
+      "Software upgrades and feature releases",
+      "GIS importing and 3D analysis tools",
+      "Annual production benchmark report"
+    ],
+    "excluded": [
+      "Accident damage to equipment",
+      "Post-deployment site labour"
+    ]
+  },
+  "baseline_study": {
+    "what_it_is": "W0 Baseline Study — a paid diagnostic engagement delivered before or at the start of a deployment. Uses low-level machine data plus in-pit observation and time-in-motion studies to baseline fleet performance and safety, and to identify a phased improvement opportunity.",
+    "typical_contents": [
+      "Data summary (analysis period, truck downloads, time-in-motion hours)",
+      "Production baseline using the Product / Process / People framework",
+      "Fleet efficiency: haulage and dig fleet time-utilisation waterfalls (availability, utilisation, effective utilisation, equipment effectiveness)",
+      "Payload analysis (underloading, body design vs material density, operator behaviours, calibration)",
+      "Queue time and over-trucking analysis",
+      "Shift change and break-loss analysis, data-integrity findings",
+      "Hire fleet utilisation vs minimum hours payable",
+      "Phased recommendations (e.g. short-interval control first, then technical studies)"
+    ],
+    "core_narrative": "Top-quartile performance and safety come from holistically solving root causes across Product, Process and People — technology alone does not fix behavioural, design or process issues. This is RaptorTech's central thesis and should anchor baseline-study and CAS conversations.",
+    "example_reference": {
+      "anonymised": true,
+      "description": "A coal haulage operation, ~6 months of data, tens of thousands of truck downloads and 100+ hours of time-in-motion. Findings included a double-digit overall efficiency opportunity driven by payload, queue time and utilisation, with phased short-interval-control and technical-study recommendations.",
+      "usage_rule": "This is an illustrative example of what a baseline study delivers — its method and structure. NEVER quote its specific figures as RaptorTech benchmarks or standard results, never name the client, and never reference any individual."
+    }
+  },
+  "narratives": {
+    "chipset_up": "RaptorTech designs and builds its own hardware from the chipset up rather than reselling third-party hardware. Use this to answer the perceived-quality objection when RaptorTech is cheaper than Hexagon/Wenco — the lower price reflects vertical integration, not lower quality.",
+    "autonomous_first_cas": "RaptorTech's collision avoidance perception uses the same categories of technology found on autonomous mining equipment, brought down to manned operations and made affordable. Use to reframe a prospect's prior bad experience with CAS that was built up from manned-equipment sensors. Do NOT claim the product is autonomous.",
+    "contractor_taas": "For mining services contractors on fixed-term contracts: a large capital purchase (e.g. a multi-million-dollar competitor system) may not pay back within a 2-year contract, whereas TaaS with no capital outlay and pause provisions matches the contract risk profile. Core framing for the contractor pipeline.",
+    "technology_not_the_whole_answer": "Technology helps but does not on its own resolve underlying behavioural, design or process issues. Sites need to transform holistically across Product, Process and People. Consistent across baseline studies and CAS positioning.",
+    "credibility": "Word of mouth is the primary acquisition channel. 'How many sites are you live on?' is a primary objection — answer confidently and specifically; reference customers can be named by BDMs where confirmed. The strongest close on a credibility challenge is an offer to speak with an existing customer.",
+    "outcomes_rule": "Documented deployments have shown double-digit productivity and payload improvements. State only at this generic level. NEVER quote a specific client's percentage figures as a benchmark, never promise a specific ROI or multiple (e.g. do not say 'up to 8x returns'), and never guarantee an outcome. Improvements depend on the customer's operation."
+  },
+  "hard_stops": [
+    "Never position safety products as replacing operational safety procedures or statutory obligations (clause 28).",
+    "Never describe CAS/guidance as autonomous or as guaranteeing incident prevention.",
+    "Never offer or imply a discount, payment holiday, deferred billing, waived CPI, or modified term — these need Brett's written approval.",
+    "Never modify or soften the CPI (4A), idle asset (4.10) or any contract mechanic.",
+    "Never present certification_pending items (PerceptVISION, PerceptAuto, integrated TPMS, ISO21815) as available now.",
+    "Never present Xpit/autonomy as a delivered product.",
+    "Never quote a price or term not in this KB — flag '[TO CONFIRM]' instead.",
+    "Never quote example-study figures as RaptorTech benchmarks, and never name a client or individual.",
+    "Never make superlative or comparative claims about RaptorTech.",
+    "All client-facing output is a draft for human review before sending.",
+    "Never describe PerceptN as having 'autonomous emergency braking' available now — L9 intervention is certification-pending; standard is L7/L8 assistive.",
+    "Never promise a specific ROI, payback multiple, or guaranteed productivity/payload outcome.",
+    "Never quote a specific reference client's performance figures as a benchmark.",
+    "Never claim a security certification (e.g. ISO 27001) as achieved — describe as designed to support those obligations.",
+    "Never claim integration with an OEM or enterprise system not listed in the integrations section.",
+    "Never present roadmap items (incl. dynamic dispatch, survey-on-the-fly, blast-hole compliance, weighbridge/crusher) as available now — they are targets.",
+    "Never add an install/commissioning fee to a TaaS site deployment — install is $0 upfront, bundled into the subscription (models 1 & 2). The ~$125/hr install applies ONLY to standalone non-subscription jobs (model 3).",
+    "Never refuse to price a deal because of its size — always show the full costing, then add the approval flag for >$100k/tender."
+  ],
+  "approval_rules": {
+    "bdm_threshold_aud": 100000,
+    "note": "Deals above AUD$100k or any tender require Brett/Tony involvement. Below that, BDMs can operate independently within the standard pricing and clauses above.",
+    "pricing_behaviour": "ALWAYS price the deal in full from KB rates and show the line-item breakdown, regardless of size. For deals over AUD$100k or tenders, ADD an approval flag (e.g. '[NEEDS BRETT — >$100k, requires approval to proceed through the deal process]') as an ADDITION to the priced answer. NEVER refuse to price or withhold the numbers — the BDM needs the figure to have the conversation; they simply cannot close without Brett/Tony sign-off."
+  },
+  "integrations": {
+    "enterprise": [
+      "Work order management systems",
+      "Safety and HR systems",
+      "ERP",
+      "Technical services design packages"
+    ],
+    "data_access": "Bi-directional integration into the PostgreSQL data layer; customers can expand the schema to use it as a central repository or pull data into their own systems. REST and GraphQL APIs, role-based.",
+    "geological": "Material movement logs available for reconciliation against mine design and integration with geological systems (e.g. acQuire).",
+    "oem_health_examples": [
+      "Caterpillar",
+      "Komatsu",
+      "Liebherr",
+      "Sandvik",
+      "Atlas Copco"
+    ],
+    "in_progress": {
+      "status": "roadmap_future",
+      "items": [
+        "Weighbridge data feeds",
+        "Crusher data feeds"
+      ],
+      "note": "Weighbridge and crusher integrations are in progress / under development — not available now."
+    },
+    "rule": "OEM list is of integration examples. Do not claim integration with a system not listed; if asked about another, say it needs confirmation with engineering."
+  },
+  "roadmap": {
+    "status_rule": "All items below are roadmap targets, NOT committed availability and NOT available now. Always present as 'targeted' / 'in development' and say timing is indicative, subject to change.",
+    "items": [
+      {
+        "feature": "Dynamic dispatch (assignment engine, path optimisation, discrete event simulation)",
+        "target": "Q2 2026"
+      },
+      {
+        "feature": "Live supervisor notifications with assignment suggestions",
+        "target": "Q1 2026"
+      },
+      {
+        "feature": "Blast-hole compliance application",
+        "target": "Q1 2026"
+      },
+      {
+        "feature": "Survey-on-the-fly / real-time topo & surface updates with BCM reconciliation",
+        "target": "Q1 2026"
+      },
+      {
+        "feature": "Operator competency / qualification management at machine sign-in",
+        "target": "not yet implemented; can be implemented before go-live if required"
+      },
+      {
+        "feature": "Survey / grade reconciliation validation",
+        "target": "in development"
+      },
+      {
+        "feature": "Tyre sensor integration (TPMS)",
+        "target": "in development"
+      },
+      {
+        "feature": "Assignment tool improvements",
+        "target": "in development"
+      },
+      {
+        "feature": "Haul road severity heat maps",
+        "target": "in development"
+      },
+      {
+        "feature": "Weighbridge / crusher integrations",
+        "target": "in development"
+      },
+      {
+        "feature": "Truck fuel optimisation",
+        "target": "not implemented; RaptorTech will scope to customer requirements"
+      },
+      {
+        "feature": "Park-up optimisation",
+        "target": "not implemented; first/last load per loading unit is tracked today"
+      }
+    ]
+  },
+  "security": {
+    "summary": "RaptorOS is an IoT platform for mobile mining equipment telemetry, designed for data protection compliance including GDPR alignment.",
+    "tenancy_isolation": "Each customer is a fully isolated tenancy — dedicated VM cluster, dedicated PostgreSQL, MQTT broker and microservices, dedicated NGINX ingress/bastion. No shared databases, brokers, queues or app containers between customers.",
+    "network_model": "Three-zone segmentation: Field Zone (devices, outbound-only MQTT/SFTP, no inbound reachability), Ingress Zone (single externally exposed NGINX bastion — TLS termination, auth, rate-limiting, API firewalling), Application Zone (internal VMs/containers, no external exposure, reachable only via ingress or VPN).",
+    "transport_security": "TLS 1.2+ for HTTP/MQTT, SSH key-based auth for SFTP, no plaintext protocols. Per-tenant domains and TLS certificates prevent misrouting. CBOR-encoded payloads, optional AES-256.",
+    "identity_access": "User apps authenticate via Microsoft/Azure AD with RBAC. Admin access requires VPN + per-user SSH keys + MFA, no shared accounts. Microservices use scoped tokens; least-privilege between services; no shared secrets across tenants. No direct database access for users or client systems.",
+    "field_device_security": "Outbound-only; no externally reachable services. Per-device credentials and strict topic-level ACLs (a device may publish only to its own telemetry topics). Offline store-and-forward with timestamped/signed packets. OTA updates via authenticated channel with signature validation.",
+    "privacy_by_design": "Pseudonymisation via the Raptor Data Number (RDN) model — operator names and direct identifiers are never transmitted in device payloads; human-readable context resolves only in the backend via a controlled master-data dictionary. Operator references can be deleted by administrators, breaking the link to an individual while retaining pseudonymised operational data.",
+    "gdpr_roles": "Customer (mining operator) is Data Controller. RaptorTech is Data Processor when hosted/managed, acting on documented customer instructions under a Data Processing Agreement. For self-hosted deployments the customer defines controller/processor relationships.",
+    "deployment_options": "Cloud or on-premise (Proxmox VE 8.x or VMware ESXi 8.x), identical logical components, no reliance on proprietary managed services.",
+    "logging": "OS, application, security-event and data-access logs to a central collector; retention configurable per customer / regulatory requirement.",
+    "rule": "State these as the platform's security design. Do not claim specific certifications (e.g. ISO 27001) as achieved — the document references compliance alignment, not certification. If asked whether certified, say it is designed to support those obligations and to confirm certification status with RaptorTech."
+  },
+  "reference_customers": {
+    "usage_rule": "These are reference deployments BDMs may cite where confirmed. Flag: confirm current status with Brett before naming externally. Do NOT quote specific client performance figures (payload %, efficiency %) as benchmarks — see outcomes rule in narratives.",
+    "status": "confirm_before_naming_external",
+    "deployments": [
+      {
+        "client": "Griffin Coal",
+        "detail": "Coal haulage, ~180 assets across a 220t haul truck fleet (Oct 2024)"
+      },
+      {
+        "client": "Agile Mining Services",
+        "detail": "~60 assets, 100t haul truck fleet (Nov 2023); SA Premier's Award for Mining productivity 2024 (joint winners)"
+      },
+      {
+        "client": "Fortescue Metals Group",
+        "detail": "Heavy mobile equipment across three sites operating PerceptN auto-braking; OEM real-time reporting on 200+ assets"
+      },
+      {
+        "client": "Aurenne Gold (WA)",
+        "detail": "~54 HME and LV assets, integrated FMS + CAS (PerceptN GNSS)"
+      },
+      {
+        "client": "Dellaglio (Zimbabwe)",
+        "detail": "~35 HME and LV assets, integrated FMS + CAS (PerceptN GNSS)"
+      },
+      {
+        "client": "Arasel-Medet (Bulgaria)",
+        "detail": "~75 HME and LV assets, CAS (PerceptN GNSS/VISION/UWB)"
+      },
+      {
+        "client": "Tepsac (Chile)",
+        "detail": "~125 HME and LV assets, CAS (PerceptN GNSS/UWB)"
+      }
+    ],
+    "consulting": "RaptorTech has acted as expert resource in FMS/dispatch transformation alongside McKinsey & Company. State factually; do not embellish."
+  }
+}
