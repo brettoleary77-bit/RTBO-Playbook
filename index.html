@@ -2417,7 +2417,7 @@ async function askSubmit(){
     const r=await fetch('https://raptor-proxy.brettoleary77.workers.dev',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,system:sysWithKB,messages:recent})
+      body:JSON.stringify({model:'claude-sonnet-5-5',max_tokens:1200,system:sysWithKB,messages:recent})
     });
     typing.remove();
     if(!r.ok){ const e=await r.json(); throw new Error(e.error?.message||('API error '+r.status)); }
